@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:drawable="@drawable/hello"
+        android:duration="500" />
+
+
+    <item
+       android:drawable="@drawable/ciao"
+       android:duration="500" />
+
+
+    <item
+        android:drawable="@drawable/privet"
+        android:duration="500" />
+
+
+    <item
+        android:drawable="@drawable/salut"
+        android:duration="500" />
+
+
+    <item
+        android:drawable="@drawable/que_tal"
+        android:duration="500" />
+
+
+    <item
+        android:drawable="@drawable/chinese"
+        android:duration="500" />
+</animation-list>
