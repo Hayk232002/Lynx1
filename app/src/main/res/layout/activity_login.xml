@@ -94,7 +94,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/gl_tv_forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -133,20 +133,14 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <android.support.constraint.Guideline
+        android:id="@+id/gl_et_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.43" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="711dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline7"
+        android:id="@+id/gl_btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
