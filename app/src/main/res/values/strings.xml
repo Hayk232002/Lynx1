@@ -2,6 +2,7 @@
     <string name="app_name">Lynx</string>
     <string name="et_email_login">Phone or Email</string>
     <string name="btn_signIn_login">Log In</string>
+    <string name="btn_createacc_login">Register now</string>
     <string name="tv_forgot">" Forgot Password?"</string>
     <string name="tv_if_login">"If you don\'t hang out in LYNX, that's the perfect time to create an account!"</string>
 
