@@ -17,39 +17,19 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintBottom_toTopOf="@+id/gl_et_email_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_signIn_login"
-        android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_button_registr"
-        android:text="@string/btn_signIn_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/et_email_login"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/et_email_login"
-        app:layout_constraintTop_toBottomOf="@+id/et_email_login"
-        app:layout_constraintVertical_bias="0.0" />
-
     <EditText
         android:id="@+id/et_email_login"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="0dp"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="24dp"
         android:autofillHints=""
         android:background="@drawable/rounded_edittect_registr_login"
         android:ems="10"
@@ -58,47 +38,113 @@
         android:maxLines="1"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/gl_et_email_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/gl_et_email_top"
         app:layout_constraintVertical_bias="0.0"
         tools:targetApi="o" />
 
-
-
     <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/gl_et_email_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_et_email_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.43" />
+
+    <Button
+        android:id="@+id/btn_signIn_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/rounded_button_registr"
+        android:text="@string/btn_signIn_login"
+        app:layout_constraintBottom_toTopOf="@+id/gl_btn_login_bottom1"
+        app:layout_constraintEnd_toEndOf="@+id/et_email_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_email_login"
+        app:layout_constraintTop_toTopOf="@+id/gl_btn_login_top1"
+        app:layout_constraintVertical_bias="0.008" />
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_btn_login_top1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_btn_login_bottom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.515" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_btn_login_top2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_btn_login_bottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.615" />
+
     <TextView
         android:id="@+id/tv_forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="352dp"
         android:text="@string/tv_forgot"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/gl_tv_forgot_bottom1"
         app:layout_constraintEnd_toEndOf="@+id/btn_signIn_login"
-        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="@+id/btn_signIn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signIn_login"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/gl_tv_forgot_top1" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/gl_tv_forgot"
+        android:id="@+id/gl_tv_forgot_top1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.57" />
+        app:layout_constraintGuide_percent="0.535" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_tv_forgot_bottom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.565" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_tv_forgot_top2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.635" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_tv_forgot_bottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.665" />
 
     <Button
         android:id="@+id/btn_createacc_login"
@@ -133,17 +179,10 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/gl_et_password"
+        android:id="@+id/gl_et_password_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.43" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/gl_btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.51" />
+        app:layout_constraintGuide_percent="0.53" />
 
 </android.support.constraint.ConstraintLayout>

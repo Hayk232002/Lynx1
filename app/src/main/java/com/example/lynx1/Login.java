@@ -1,6 +1,7 @@
 package com.example.lynx1;
 
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import android.support.constraint.Guideline;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,15 +36,23 @@ public class Login extends AppCompatActivity {
     //Firebase
     private FirebaseAuth mAuth;
 
+    //Guidelines
+    Guideline gl_btn_login_top1;
+    Guideline gl_btn_login_top2;
+    Guideline gl_btn_login_bottom1;
+    Guideline gl_btn_login_bottom2;
+    Guideline gl_et_password_bottom;
+    Guideline gl_tv_forgot_top1;
+    Guideline gl_tv_forgot_top2;
+    Guideline gl_tv_forgot_bottom1;
+    Guideline gl_tv_forgot_bottom2;
+
     Button btn_createacc_login;
     EditText et_email_login;
     EditText et_password_login;
     TextView tv;
     TextView tv_forgot;
     Button btn_signIn_login;
-    Guideline gl_et_password;
-    Guideline gl_btn_login;
-    Guideline gl_tv_forgot;
     ConstraintLayout cl_login;
     ConstraintSet constraintSet;
 
@@ -55,9 +66,6 @@ public class Login extends AppCompatActivity {
     boolean getCoordinates = false;
     float btn_signIn_login_y = 0;
     float tv_forgot_y = 0;
-    float gl_et_password_y = 0;
-    float gl_btn_login_y = 0;
-    float gl_tv_forgot_y = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +78,16 @@ public class Login extends AppCompatActivity {
         btn_signIn_login = (Button) findViewById(R.id.btn_signIn_login);
         et_email_login = (EditText) findViewById(R.id.et_email_login);
         cl_login = (ConstraintLayout) findViewById(R.id.cl_login);
-        gl_et_password = (Guideline) findViewById(R.id.gl_et_password);
-        gl_btn_login = (Guideline) findViewById(R.id.gl_btn_login);
-        gl_tv_forgot = (Guideline) findViewById(R.id.gl_tv_forgot);
+
+        gl_btn_login_top1 = (Guideline) findViewById(R.id.gl_btn_login_top1);
+        gl_btn_login_top2 = (Guideline) findViewById(R.id.gl_btn_login_top2);
+        gl_btn_login_bottom1 = (Guideline) findViewById(R.id.gl_btn_login_bottom1);
+        gl_btn_login_bottom2 = (Guideline) findViewById(R.id.gl_btn_login_bottom2);
+        gl_et_password_bottom = (Guideline) findViewById(R.id.gl_et_password_bottom);
+        gl_tv_forgot_top1 = (Guideline) findViewById(R.id.gl_tv_forgot_top1);
+        gl_tv_forgot_top2 = (Guideline) findViewById(R.id.gl_tv_forgot_top2);
+        gl_tv_forgot_bottom1 = (Guideline) findViewById(R.id.gl_tv_forgot_bottom1);
+        gl_tv_forgot_bottom2 = (Guideline) findViewById(R.id.gl_tv_forgot_bottom2);
 
         //Firebase
         mAuth = FirebaseAuth.getInstance();
@@ -98,6 +113,7 @@ public class Login extends AppCompatActivity {
 
             }
 
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -105,9 +121,6 @@ public class Login extends AppCompatActivity {
                 if (!getCoordinates){
                     btn_signIn_login_y = btn_signIn_login.getY();
                     tv_forgot_y = tv_forgot.getY();
-                    gl_et_password_y = gl_et_password.getY();
-                    gl_btn_login_y = gl_btn_login.getY();
-                    gl_tv_forgot_y = gl_tv_forgot.getY();
 
                     getCoordinates = true;
                 }
@@ -115,13 +128,13 @@ public class Login extends AppCompatActivity {
                 if(charSequence.toString().trim().length()!=0 && count==0){
                     Log.wtf("gnal:",charSequence.toString());
 
-                    objectAnimator_tv_forgot_gnal=ObjectAnimator.ofFloat(tv_forgot,"y",/*1050*/ gl_tv_forgot_y);
-                    objectAnimator_btn_login_gnal=ObjectAnimator.ofFloat(btn_signIn_login,"y",/*910*/ gl_btn_login_y);
+                    objectAnimator_tv_forgot_gnal=ObjectAnimator.ofFloat(tv_forgot,"y",/*1050*/ 0);
+                    objectAnimator_btn_login_gnal=ObjectAnimator.ofFloat(btn_signIn_login,"y",/*910*/ 0);
 
                     objectAnimator_btn_login_gnal.setDuration(350);
                     objectAnimator_tv_forgot_gnal.setDuration(350);
-                    objectAnimator_tv_forgot_gnal.start();
-                    objectAnimator_btn_login_gnal.start();
+//                    objectAnimator_tv_forgot_gnal.start();
+//                    objectAnimator_btn_login_gnal.start();
 
                     et_password_login = new EditText(Login.this);
 
@@ -142,12 +155,29 @@ public class Login extends AppCompatActivity {
                     constraintSet = new ConstraintSet();
                     constraintSet.clone(cl_login);
 
-//                    constraintSet.connect(et_password_login.getId(),ConstraintSet.START,cl_login.getId(),ConstraintSet.START,0);
-                    constraintSet.connect(et_password_login.getId(),ConstraintSet.TOP,et_email_login.getId(),ConstraintSet.BOTTOM);
-                    constraintSet.setMargin(et_password_login.getId(),ConstraintSet.TOP,16);
-//                    constraintSet.connect(et_password_login.getId(),ConstraintSet.BOTTOM,cl_login.getId(),ConstraintSet.BOTTOM,0);
-//                    constraintSet.connect(et_password_login.getId(),ConstraintSet.END,cl_login.getId(),ConstraintSet.END,0);
-                    constraintSet.constrainDefaultHeight(et_password_login.getId(), 200);
+                    //et_password_login
+                    constraintSet.connect(et_password_login.getId(),ConstraintSet.TOP,gl_btn_login_top1.getId(),ConstraintSet.BOTTOM,0);
+                    constraintSet.connect(et_password_login.getId(),ConstraintSet.BOTTOM,gl_et_password_bottom.getId(),ConstraintSet.TOP,0);
+                    constraintSet.connect(et_password_login.getId(),ConstraintSet.START,et_email_login.getId(),ConstraintSet.START,0);
+                    constraintSet.connect(et_password_login.getId(),ConstraintSet.END,et_email_login.getId(),ConstraintSet.END,0);
+
+                    //btn_signIn_login
+                    constraintSet.clear(btn_signIn_login.getId(), ConstraintSet.TOP);
+                    constraintSet.clear(btn_signIn_login.getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(btn_signIn_login.getId(),ConstraintSet.TOP,gl_btn_login_top2.getId(),ConstraintSet.BOTTOM,0);
+                    constraintSet.connect(btn_signIn_login.getId(),ConstraintSet.BOTTOM,gl_btn_login_bottom2.getId(),ConstraintSet.TOP,0);
+
+                    //tv_forgot_login
+                    constraintSet.clear(tv_forgot.getId(), ConstraintSet.TOP);
+                    constraintSet.clear(tv_forgot.getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(tv_forgot.getId(),ConstraintSet.TOP,gl_tv_forgot_top2.getId(),ConstraintSet.BOTTOM,0);
+                    constraintSet.connect(tv_forgot.getId(),ConstraintSet.BOTTOM,gl_tv_forgot_bottom2.getId(),ConstraintSet.TOP,0);
+
+
+                    et_password_login.setAnimation(AnimationUtils.loadAnimation(Login.this, R.anim.fade_in));
+                    AutoTransition autoTransition = new AutoTransition();
+                    autoTransition.setDuration(200);
+                    TransitionManager.beginDelayedTransition(cl_login,autoTransition);
                     constraintSet.applyTo(cl_login);
 
                     count=1;
@@ -165,8 +195,28 @@ public class Login extends AppCompatActivity {
 
                     objectAnimator_btn_login_gal.setDuration(350);
                     objectAnimator_tv_forgot_gal.setDuration(350);
-                    objectAnimator_tv_forgot_gal.start();
-                    objectAnimator_btn_login_gal.start();
+//                    objectAnimator_tv_forgot_gal.start();
+//                    objectAnimator_btn_login_gal.start();
+
+                    constraintSet = new ConstraintSet();
+                    constraintSet.clone(cl_login);
+
+                    //btn_signIn_login
+                    constraintSet.clear(btn_signIn_login.getId(), ConstraintSet.TOP);
+                    constraintSet.clear(btn_signIn_login.getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(btn_signIn_login.getId(),ConstraintSet.TOP,gl_btn_login_top1.getId(),ConstraintSet.BOTTOM,0);
+                    constraintSet.connect(btn_signIn_login.getId(),ConstraintSet.BOTTOM,gl_btn_login_bottom1.getId(),ConstraintSet.TOP,0);
+
+                    //tv_forgot_login
+                    constraintSet.clear(tv_forgot.getId(), ConstraintSet.TOP);
+                    constraintSet.clear(tv_forgot.getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(tv_forgot.getId(),ConstraintSet.TOP,gl_tv_forgot_top1.getId(),ConstraintSet.BOTTOM,0);
+                    constraintSet.connect(tv_forgot.getId(),ConstraintSet.BOTTOM,gl_tv_forgot_bottom1.getId(),ConstraintSet.TOP,0);
+
+                    AutoTransition autoTransition = new AutoTransition();
+                    autoTransition.setDuration(200);
+                    TransitionManager.beginDelayedTransition(cl_login,autoTransition);
+                    constraintSet.applyTo(cl_login);
 
                     count=0;
                 }
